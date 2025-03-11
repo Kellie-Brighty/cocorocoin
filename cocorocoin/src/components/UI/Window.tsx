@@ -15,9 +15,9 @@ const Window = ({
   children,
   onClose,
   onMinimize,
-  isActive = true,
+  
 }: WindowProps) => {
-  const [isDragging, setIsDragging] = useState(false);
+  // const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

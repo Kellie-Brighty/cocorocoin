@@ -1,12 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import {
-  DocumentTextIcon,
-  ChartBarIcon,
-  UsersIcon,
-  CurrencyDollarIcon,
-  LinkIcon,
-} from "@heroicons/react/24/outline";
+
 import aboutImage from "../../../assets/about.jpg";
 
 interface Section {
