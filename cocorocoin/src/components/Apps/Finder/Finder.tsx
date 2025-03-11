@@ -82,18 +82,12 @@ const Finder = () => {
           <h2 className="text-2xl font-bold">Tokenomics</h2>
           <div className="space-y-4 text-gray-600 dark:text-gray-300">
             <p>
-              <strong>Total Supply:</strong> 1,000,000,000 COCO
+              <strong>Total Supply:</strong> 1,000,000,000 COCOROCOIN
             </p>
-            <p>
-              <strong>Initial Price:</strong> $0.01
-            </p>
-            <h3 className="text-xl font-semibold">Distribution</h3>
+            <h3 className="text-xl font-semibold mt-6">Distribution</h3>
             <ul className="list-disc pl-5 space-y-2">
-              <li>Public Sale: 40%</li>
-              <li>Team: 20%</li>
-              <li>Development: 15%</li>
-              <li>Marketing: 15%</li>
-              <li>Reserve: 10%</li>
+              <li>Marketing & CEX: 20%</li>
+              <li>Liquidity: 80%</li>
             </ul>
           </div>
         </div>
