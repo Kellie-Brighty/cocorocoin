@@ -25,7 +25,7 @@ interface AppWindow {
 interface DesktopItem {
   id: string;
   name: string;
-  icon: string;
+  icon: string | React.ReactNode;
   position: { x: number; y: number };
   content: React.ReactNode;
   title: string;
@@ -34,7 +34,7 @@ interface DesktopItem {
 interface DockItem {
   id: string;
   name: string;
-  icon: React.ReactNode;
+  icon: string | React.ReactNode;
   action: () => void;
 }
 
@@ -57,7 +57,7 @@ const Layout = ({ children }: LayoutProps) => {
       id: "media",
       name: "Media",
       icon: "🎬",
-      position: { x: 20, y: 20 },
+      position: { x: 20, y: 10 },
       content: (
         <div className="p-4 space-y-6">
           <h2 className="text-xl font-bold mb-4">CocoroCoin Media</h2>
@@ -100,10 +100,72 @@ const Layout = ({ children }: LayoutProps) => {
       title: "Media Gallery",
     },
     {
+      id: "telegram-desktop",
+      name: "Telegram",
+      icon: (
+        <TelegramIcon
+          className={`w-7 h-7 ${isMobile ? "text-black dark:text-white" : "text-white"}`}
+        />
+      ),
+      position: { x: 120, y: 10 },
+      content: (
+        <div className="p-6 space-y-4">
+          <div className="flex items-center space-x-3">
+            <TelegramIcon className="w-8 h-8 text-blue-500" />
+            <h2 className="text-2xl font-bold">Telegram Community</h2>
+          </div>
+          <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-center">
+            <p className="mb-4">Join our Telegram community to stay updated!</p>
+            <a
+              href="https://t.me/ETHcocorocoin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              <TelegramIcon className="w-5 h-5" />
+              <span>Join Telegram</span>
+            </a>
+          </div>
+        </div>
+      ),
+      title: "Telegram",
+    },
+    {
+      id: "x-desktop",
+      name: "X (Twitter)",
+      icon: (
+        <XIcon
+          className={`w-7 h-7 ${isMobile ? "text-black dark:text-white" : "text-white"}`}
+        />
+      ),
+      position: { x: 120, y: 100 },
+      content: (
+        <div className="p-6 space-y-4">
+          <div className="flex items-center space-x-3">
+            <XIcon className="w-8 h-8" />
+            <h2 className="text-2xl font-bold">X (Twitter)</h2>
+          </div>
+          <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-center">
+            <p className="mb-4">Follow us on X for the latest updates!</p>
+            <a
+              href="https://x.com/cocorocoineth"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              <XIcon className="w-5 h-5" />
+              <span>Follow on X</span>
+            </a>
+          </div>
+        </div>
+      ),
+      title: "X (Twitter)",
+    },
+    {
       id: "documents",
       name: "Documents",
       icon: "📁",
-      position: { x: 20, y: 120 },
+      position: { x: 20, y: 100 },
       content: (
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4">Documents</h2>
@@ -118,7 +180,7 @@ const Layout = ({ children }: LayoutProps) => {
       id: "projects",
       name: "Projects",
       icon: "📂",
-      position: { x: 20, y: 220 },
+      position: { x: 20, y: 180 },
       content: (
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4">Projects</h2>
@@ -133,7 +195,7 @@ const Layout = ({ children }: LayoutProps) => {
       id: "downloads",
       name: "Downloads",
       icon: "📥",
-      position: { x: 20, y: 320 },
+      position: { x: 20, y: 270 },
       content: (
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4">Downloads</h2>
@@ -325,7 +387,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="relative min-h-screen">
       {/* Background with blur effect */}
       <div
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat transition-all duration-300"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat transition-all md:bg-top duration-300"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           filter: windows.some((w) => w.isOpen) ? "blur(5px)" : "none",
@@ -366,7 +428,7 @@ const Layout = ({ children }: LayoutProps) => {
                 >
                   <DesktopIcon
                     name={item.name}
-                    icon={item.icon}
+                    icon={item.icon as string}
                     position={item.position}
                     onClick={() =>
                       openWindow(item.id, item.content, item.title)

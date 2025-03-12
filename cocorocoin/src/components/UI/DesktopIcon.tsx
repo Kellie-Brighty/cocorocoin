@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 interface DesktopIconProps {
   name: string;
-  icon: string;
+  icon: string | React.ReactNode;
   position: { x: number; y: number };
   onClick: () => void;
 }

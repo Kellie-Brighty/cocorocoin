@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import backgroundImage from "../../assets/background.png";
+import logo from "../../assets/logo.png";
 
 interface LoginScreenProps {
   onLogin: () => void;
@@ -16,10 +17,10 @@ const LoginScreen = ({ onLogin }: LoginScreenProps) => {
   const [time, setTime] = useState(new Date());
 
   // Update clock every second
-  useState(() => {
+  useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
-  });
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,9 +37,10 @@ const LoginScreen = ({ onLogin }: LoginScreenProps) => {
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Image */}
       <div
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat md:bg-cover md:bg-top md:bg-no-repeat"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       />
+      <div className="absolute inset-0 bg-black/30"></div>
 
       {/* Time and Date */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center text-white">
@@ -52,35 +54,36 @@ const LoginScreen = ({ onLogin }: LoginScreenProps) => {
             day: "numeric",
           })}
         </div>
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-xl text-white mb-4 font-semibold mt-[50px]"
+        >
+          Welcome To Cocoro Coin
+        </motion.h2>
       </div>
 
       {/* Login Form */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mt-[200px] text-center"
+        transition={{ duration: 0.5 }}
+        className="mt-[400px] md:mt-[300px] text-center"
       >
+        {/* Welcome Text */}
+
         {/* User Avatar */}
         <motion.div
           className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-4xl"
           whileHover={{ scale: 1.05 }}
         >
-          {selectedUser.avatar}
+          <img src={logo} alt="logo" />
         </motion.div>
-
-        {/* User Name */}
-        <h2 className="text-xl text-white mb-4">{selectedUser.name}</h2>
 
         {/* Password Input */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter Password"
-              className="w-64 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
-            />
             {error && (
               <motion.p
                 initial={{ opacity: 0 }}
