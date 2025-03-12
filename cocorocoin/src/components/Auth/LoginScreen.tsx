@@ -8,10 +8,6 @@ interface LoginScreenProps {
 }
 
 const LoginScreen = ({ onLogin }: LoginScreenProps) => {
-  const [selectedUser] = useState({
-    name: "CocoroCoin User",
-    avatar: "👤",
-  });
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [time, setTime] = useState(new Date());
